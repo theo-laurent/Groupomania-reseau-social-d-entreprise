@@ -5,11 +5,10 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "C5hEy9wUU6b82Ky",
+  database: "groupomania",
 });
 
 const groupomaniaDb = `CREATE DATABASE IF NOT EXISTS groupomania`;
-
-const useDb = "USE groupomania";
 
 const tableUser = `CREATE TABLE IF NOT EXISTS user(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -28,7 +27,7 @@ const tablePost = `CREATE TABLE IF NOT EXISTS post(
     content TEXT NOT NULL,
     attachment VARCHAR(255),
     createdAt DATETIME NOT NULL ,
-    updatedAt DATETIME NOT NULL,
+    updatedAt DATETIME,
     FOREIGN KEY(userId) REFERENCES user(id)
     ) ENGINE =InnoDB;
     `;
@@ -39,7 +38,7 @@ const tableComment = `CREATE TABLE IF NOT EXISTS comment(
     postId INT NOT NULL,
     message TEXT NOT NULL,
     createdAt DATETIME NOT NULL,
-    updatedAt DATETIME NOT NULL,
+    updatedAt DATETIME,
     FOREIGN KEY(userId) REFERENCES user(id),
     FOREIGN KEY(postId) REFERENCES post(id)
     ) ENGINE = InnoDB;
@@ -50,7 +49,7 @@ const tableLikes = `CREATE TABLE IF NOT EXISTS likes(
     userId INT NOT NULL,
     postId INT NOT NULL,
     createdAt DATETIME NOT NULL,
-    updatedAt DATETIME NOT NULL,
+    updatedAt DATETIME,
     FOREIGN KEY (userId) REFERENCES user(id),
     FOREIGN KEY (postId) REFERENCES post(id)
     ) ENGINE = InnoDB;`;
@@ -62,8 +61,6 @@ function generateDb() {
       console.log("Connexion au serveur MySQL...");
       db.query(groupomaniaDb);
       console.log("Base de données 'groupomania' créée");
-      db.query(useDb);
-      console.log("La base de données 'groupomania' a bien été selectionnée");
       db.query(tableUser);
       console.log("La table 'user' est créée");
       db.query(tablePost);

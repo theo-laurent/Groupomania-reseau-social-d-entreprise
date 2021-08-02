@@ -1,14 +1,12 @@
 //const
 const express = require("express");
-const mysql = require("mysql2");
-const db = require("./config_db");
-
 const app = express();
 
 //routes
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 
+//CORS
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -23,5 +21,6 @@ app.use(function (req, res, next) {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 module.exports = app;
