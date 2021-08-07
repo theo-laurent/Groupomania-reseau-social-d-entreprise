@@ -20,6 +20,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 

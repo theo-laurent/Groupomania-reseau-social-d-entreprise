@@ -34,7 +34,6 @@ exports.login = function (req, res, next) {
       if (error) {
         throw error;
       } else {
-        console.log(results);
         if (results.length === 0) {
           res.status(400).json({ message: "Utilisateur non trouvé." });
         } else {
