@@ -45,11 +45,12 @@ exports.login = function (req, res, next) {
                   .status(401)
                   .json({ message: "Mot de passe incorrect" });
               } else {
-                res.status(200).json({
-                  userId: user[0].id,
+                return res.status(200).json({
+                  message: "Utilisateur connecté !",
+                  userId: results.id,
                   token: jwt.sign(
                     {
-                      userId: user[0].id,
+                      userId: results.id,
                     },
                     "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr",
                     { expiresIn: "24h" }

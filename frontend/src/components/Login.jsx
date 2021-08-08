@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+
+// import css personnel
+import "../styles/Login.css";
+
+//import booststrap
+import Container from "react-bootstrap/esm/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function loginUser(credentials) {
   return fetch("http://localhost:4200/api/users/login", {
@@ -19,8 +26,8 @@ function loginUser(credentials) {
 }
 
 export default function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,12 +38,12 @@ export default function Login() {
   }
 
   return (
-    <form className="loginForm" onSubmit={handleSubmit}>
-      <h2>Se connecter</h2>
-      <div>
-        <label>
-          Email:
-          <input
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <h2>Se connecter</h2>
+        <Form.Group>
+          <Form.Label htmlFor="email">Email:</Form.Label>
+          <Form.Control
             type="email"
             name="email"
             value={email}
@@ -44,12 +51,10 @@ export default function Login() {
               setEmail(e.target.value);
             }}
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Mot de passe:
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="password">Mot de passe:</Form.Label>
+          <Form.Control
             type="password"
             name="password"
             value={password}
@@ -57,13 +62,9 @@ export default function Login() {
               setPassword(e.target.value);
             }}
           />
-        </label>
-      </div>
-      <button type="submit">Se connecter</button>
-    </form>
+        </Form.Group>
+        <Button type="submit">Se connecter</Button>
+      </Form>
+    </Container>
   );
 }
-
-Login.prototype = {
-  onConnect: PropTypes.func.isRequired,
-};
