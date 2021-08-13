@@ -46,14 +46,15 @@ exports.login = function (req, res, next) {
                   .json({ message: "Mot de passe incorrect" });
               } else {
                 return res.status(200).json({
+                  userId: results[0].id,
                   message: "Utilisateur connecté !",
-                  userId: results.id,
+
                   token: jwt.sign(
                     {
-                      userId: results.id,
+                      userId: results[0].id,
                     },
                     "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr",
-                    { expiresIn: "24h" }
+                    { expiresIn: "8h" }
                   ),
                 });
               }
