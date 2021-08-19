@@ -1,0 +1,15 @@
+#formUser {
+  max-width: 600px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.formBio {
+  min-height: 200px !important;
+}
+
+.btnUser {
+  width: 200px !important;
+}

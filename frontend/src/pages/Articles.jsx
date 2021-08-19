@@ -1,12 +1,14 @@
 import React from "react";
 //import components
-import CreateArticle from "../components/CreateArticle";
-import GetArticles from "../components/GetArticles";
+import CreateArticle from "../components/createArticle/CreateArticle";
+import GetArticles from "../components/getArticles/GetArticles";
 
 export default function Articles() {
+  
+
   return (
     <div>
-      <CreateArticle />
+      <CreateArticle/>
       <GetArticles />
     </div>
   );

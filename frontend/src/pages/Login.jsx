@@ -1,5 +1,4 @@
-import React, { useState, Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import AuthApi from "../components/AuthApi";
 
 export default function Login() {
@@ -29,9 +28,7 @@ export default function Login() {
         let storage = JSON.parse(localStorage.getItem("token"));
         if (storage.token === undefined) {
           Auth.setAuth(false);
-          alert(
-            "Utilisateur non identifié, tentez de vous connecter à nouveau"
-          );
+          alert(JSON.stringify(result.message));
         } else {
           Auth.setAuth(true);
         }

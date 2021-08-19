@@ -4,7 +4,11 @@ const jwt = require("jsonwebtoken");
 exports.getAllPost = function (req, res, next) {
   db.promise()
     .query(
-      `SELECT user.firstName, user.lastName, post.id, post.userId, post.title, post.content, post.attachment, post.createdAt FROM user JOIN post on user.id = post.userId ORDER BY post.createdAt DESC`
+      `SELECT user.firstName, user.lastName, post.id, post.userId, 
+        post.title, post.content, post.attachment, post.createdAt 
+      FROM user 
+      JOIN post on user.id = post.userId 
+      ORDER BY post.createdAt DESC`
     )
     .then(function (data) {
       res.status(200).json(data);
@@ -16,14 +20,23 @@ exports.getAllPost = function (req, res, next) {
 
 exports.getOnePost = function (req, res, next) {
   let id = req.params.id;
-  db.promise()
-    .query(`SELECT * FROM post WHERE id = ${id}`)
-    .then(function (data) {
-      res.status(200).json({ data });
-    })
-    .catch(function (error) {
-      res.status(400).json({ error });
-    });
+  db.query(
+    `SELECT post.id AS postId, post.title, post.content, post.attachment, 
+            post.createdAt, post.updatedAt, 
+            user.firstName, user.lastName, user.id AS userId
+      FROM post
+      JOIN user
+      ON post.userId = user.ids
+      WHERE post.id = ?;`,
+    [id],
+    function (error, result) {
+      if (error) {
+        throw error;
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
 };
 
 exports.createPost = function (req, res, next) {
@@ -42,7 +55,7 @@ exports.createPost = function (req, res, next) {
   };
   db.query(`INSERT INTO post SET ?`, [article], function (error) {
     if (error) {
-      res.status(400).json({ error });
+      throw error;
     } else {
       res.status(201).json({ message: "Article bien ajouté !" });
     }
@@ -52,29 +65,13 @@ exports.createPost = function (req, res, next) {
 exports.deletePost = function (req, res, next) {
   let id = req.params.id;
 
-  const sqlId = db.query(`SELECT userId FROM post WHERE id = ${id}`);
-  db.promise()
-    .query(`SELECT * FROM post WHERE id = ${id}`)
-    .then(function () {
-      if (userId == sqlId) {
-        db.promise()
-          .query(`DELETE from post WHERE id = ${id}`)
-          .then(function () {
-            res.status(200).json({ message: "Post supprimé !" });
-          })
-          .catch(function (error) {
-            res.status(404).json({ error });
-          });
-      } else {
-        res.status(401).json({
-          message:
-            "Vous ne pouvez pas supprimer les posts des autres utilisateurs !",
-        });
-      }
-    })
-    .catch(function (error) {
-      res.status(500).json({ error });
-    });
+  db.query("DELETE FROM post WHERE id = ?", [id], function (error, result) {
+    if (error) {
+      throw error;
+    } else {
+      res.status(201).json({ message: "Publication bien supprimé !" });
+    }
+  });
 };
 
 exports.updatePost;
