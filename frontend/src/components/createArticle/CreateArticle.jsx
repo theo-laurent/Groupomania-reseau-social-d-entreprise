@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./createArticle.css";
 
 export default function CreateArticle() {
@@ -69,7 +70,10 @@ export default function CreateArticle() {
         <label for="floatingInput">Lien de l'article</label>
       </div>
 
-      <button className="w-100 btn btn-lg btn-primary mb-5 btnArticle" type="submit">
+      <button
+        className="w-100 btn btn-lg btn-primary mb-5 btnArticle"
+        type="submit"
+      >
         Poster{" "}
       </button>
     </form>

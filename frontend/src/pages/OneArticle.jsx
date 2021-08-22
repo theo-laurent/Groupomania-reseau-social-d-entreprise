@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import Moment from "react-moment";
 
 export default function GetOneArticle() {
@@ -31,11 +31,13 @@ export default function GetOneArticle() {
       });
   }, []);
 
+  const history = useHistory();
+  const handler = function () {
+    history.push("/articles");
+  };
+
   const deleteArticle = async function (e) {
     e.preventDefault();
-
-    console.log(dataArticle);
-
     if (isAdmin === 1 || idOfUser === dataArticle.userId) {
       if (
         window.confirm("Voulez vous vraiment supprimer cette publication ?")
@@ -52,6 +54,7 @@ export default function GetOneArticle() {
           })
           .then(function (result) {
             alert(JSON.stringify(result.message));
+            handler();
           })
           .catch(function (error) {
             return error;

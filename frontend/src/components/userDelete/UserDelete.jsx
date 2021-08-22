@@ -1,4 +1,7 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+// import component
+import Logout from "../Logout";
 
 export default function UserDelete() {
   const storage = JSON.parse(localStorage.getItem("token"));
@@ -6,7 +9,6 @@ export default function UserDelete() {
 
   const submit = async function (e) {
     e.preventDefault();
-
     if (
       window.confirm(
         "Voulez vous vraiment supprimer votre compte ? Cela supprimera également les articles que vous avez publiés."
@@ -20,6 +22,7 @@ export default function UserDelete() {
         },
       })
         .then(function (res) {
+          localStorage.clear();
           window.location.reload();
           return res.json();
         })

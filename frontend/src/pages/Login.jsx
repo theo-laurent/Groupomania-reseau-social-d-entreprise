@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AuthApi from "../components/AuthApi";
 
 export default function Login() {
+
   localStorage.clear();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

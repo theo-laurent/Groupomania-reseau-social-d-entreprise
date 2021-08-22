@@ -26,7 +26,7 @@ exports.getOnePost = function (req, res, next) {
             user.firstName, user.lastName, user.id AS userId
       FROM post
       JOIN user
-      ON post.userId = user.ids
+      ON post.userId = user.id
       WHERE post.id = ?;`,
     [id],
     function (error, result) {
