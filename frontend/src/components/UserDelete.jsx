@@ -1,7 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-// import component
-import Logout from "../Logout";
+
 
 export default function UserDelete() {
   const storage = JSON.parse(localStorage.getItem("token"));

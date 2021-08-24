@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserDelete from "../userDelete/UserDelete";
-import "../userUpdate/userUpdate.css";
+import UserDelete from "./UserDelete";
 
 export default function UserUpdate() {
   const storage = JSON.parse(localStorage.getItem("token"));
@@ -10,27 +9,30 @@ export default function UserUpdate() {
   const [lastName, setLastName] = useState("");
   const [bio, setBio] = useState("");
 
-  useEffect(function () {
-    fetch("http://localhost:4200/api/users/getUser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    })
-      .then(function (res) {
-        return res.json();
+  useEffect(
+    function () {
+      fetch("http://localhost:4200/api/users/getUser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
       })
-      .then(function (result) {
-        console.log(result);
-        setFirstName(result.firstName);
-        setLastName(result.lastName);
-        setBio(result.bio);
-      })
-      .catch(function (error) {
-        return error;
-      });
-  }, []);
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (result) {
+          console.log(result);
+          setFirstName(result.firstName);
+          setLastName(result.lastName);
+          setBio(result.bio);
+        })
+        .catch(function (error) {
+          return error;
+        });
+    },
+    [token]
+  );
 
   const submit = async function (e) {
     e.preventDefault();
@@ -60,7 +62,7 @@ export default function UserUpdate() {
   return (
     <form onSubmit={submit} className="form-signin" id="formUser">
       <div className="mb-3 text-left">
-        <label for="formFile" className="form-label">
+        <label htmlFor="formFile" className="form-label">
           <strong>Avatar</strong>
         </label>
         <input className="form-control" type="file" id="formFile" />
@@ -77,7 +79,7 @@ export default function UserUpdate() {
             setFirstName(e.target.value);
           }}
         />
-        <label for="floatingInput">Prénom</label>
+        <label htmlFor="floatingInput">Prénom</label>
       </div>
       <div className="form-floating mb-2">
         <input
@@ -90,7 +92,7 @@ export default function UserUpdate() {
             setLastName(e.target.value);
           }}
         />
-        <label for="floatingInput">Nom</label>
+        <label htmlFor="floatingInput">Nom</label>
       </div>
 
       <div className="form-floating mb-2">
@@ -104,7 +106,7 @@ export default function UserUpdate() {
             setBio(e.target.value);
           }}
         />
-        <label for="floatingPassword">Votre bio</label>
+        <label htmlFor="floatingPassword">Votre bio</label>
       </div>
       <div className="d-flex justify-content-evenly">
         <button className="btn btn-lg btn-primary mt-3 btnUser" type="submit">

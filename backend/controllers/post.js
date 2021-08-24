@@ -40,7 +40,7 @@ exports.getOnePost = function (req, res, next) {
 };
 
 exports.createPost = function (req, res, next) {
-  const dateTime = new Date().toISOString().slice(0, 19).replace("T", " ");
+  const dateTime = new Date();
 
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
@@ -74,4 +74,41 @@ exports.deletePost = function (req, res, next) {
   });
 };
 
-exports.updatePost;
+exports.commentPost = function (req, res, next) {
+  const dateTime = new Date();
+  const comment = {
+    userId: req.body.idOfUser,
+    postId: req.body.id,
+    message: req.body.comment,
+    createdAt: dateTime,
+  };
+
+  db.query(`INSERT INTO comment SET ? `, [comment], function (error) {
+    if (error) {
+      throw error;
+    } else {
+      res.status(201).json({ message: "Commentaire bien publié !" });
+    }
+  });
+};
+
+exports.getComment = function (req, res, next) {
+  let id = req.params.id;
+
+  db.query(
+    `SELECT user.firstName, user.lastName, comment.message, comment.createdAt, comment.updatedAt
+    FROM comment
+    JOIN user ON comment.userId = user.id
+    JOIN post ON comment.postId = post.id
+    WHERE post.id = ?
+    ORDER BY comment.createdAt DESC `,
+    [id],
+    function (error, result) {
+      if (error) {
+        throw error;
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+};

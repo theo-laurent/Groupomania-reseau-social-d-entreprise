@@ -1,7 +1,7 @@
 import React from "react";
-import UserArticles from "../components/userArticles/UserArticles";
+import UserArticles from "../components/UserArticles";
 //import components
-import UserUpdate from "../components/userUpdate/UserUpdate";
+import UserUpdate from "../components/UserUpdate";
 
 export default function UserAccount() {
   return (

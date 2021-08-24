@@ -6,7 +6,7 @@ import AuthApi from "./AuthApi";
 //import pages
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Articles from "../pages/Articles";
+import AllArticles from "../pages/AllArticles";
 import Home from "../pages/Home";
 import UserAccount from "../pages/UserAccount";
 import OneArticle from "../pages/OneArticle";
@@ -19,7 +19,11 @@ export default function Routes() {
       <ProtectedLogin path="/" exact component={Home} />
       <ProtectedLogin path="/signup" component={Signup} />
       <ProtectedLogin path="/login" component={Login} auth={Auth.auth} />
-      <ProtectedRoute path="/articles" auth={Auth.auth} component={Articles} />
+      <ProtectedRoute
+        path="/articles"
+        auth={Auth.auth}
+        component={AllArticles}
+      />
       <ProtectedRoute path="/user" auth={Auth.auth} component={UserAccount} />
       <ProtectedRoute
         path="/article/:id"

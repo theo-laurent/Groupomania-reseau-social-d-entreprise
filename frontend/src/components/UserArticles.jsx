@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 
-import "../getArticles/getArticles.css";
-
-export default function GetArticles() {
+export default function UserArticles() {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
-  const [articles, setArticles] = useState();
+  const [articles, setArticles] = useState([]);
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/post", {
+      fetch("http://localhost:4200/api/users/userArticles", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -23,7 +20,7 @@ export default function GetArticles() {
           return res.json();
         })
         .then(function (result) {
-          setArticles(result[0]);
+          setArticles(result);
         })
         .catch(function (error) {
           return error;
@@ -39,12 +36,9 @@ export default function GetArticles() {
       return (
         <div className="card mb-5">
           <div className="card-header d-flex justify-content-between align-middle">
-            <h6 className="">{article.firstName + " " + article.lastName}</h6>
-            <Link to={`/article/${article.id}`}>
-              <button type="button" className="btn btn-outline-primary d-flex">
-                <i class="bi bi-plus-lg"></i>
-              </button>
-            </Link>
+            <h6 className="mt-auto">
+              {article.firstName + " " + article.lastName}
+            </h6>
           </div>
           <div className="card-body text-center">
             <h5 className="card-title">{article.title}</h5>

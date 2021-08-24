@@ -43,53 +43,53 @@ export default function Signup(props) {
           autoFocus
           type="text"
           className="form-control"
-          id="floatingInput"
+          id="floatingInput inputFirstName"
           placeholder="Martin"
           value={firstName}
           onChange={function (e) {
             setFirstName(e.target.value);
           }}
         />
-        <label for="floatingInput">Prénom</label>
+        <label htmlFor="floatingInput">Prénom</label>
       </div>
       <div className="form-floating mb-2">
         <input
           type="text"
           className="form-control"
-          id="floatingInput"
+          id="floatingInput inputLastName"
           placeholder="Dupont"
           value={lastName}
           onChange={function (e) {
             setLastName(e.target.value);
           }}
         />
-        <label for="floatingInput">Nom</label>
+        <label htmlFor="floatingInput">Nom</label>
       </div>
       <div className="form-floating mb-2">
         <input
           type="email"
           className="form-control"
-          id="floatingInput"
+          id="floatingInput inputEmail"
           placeholder="name@example.com"
           value={email}
           onChange={function (e) {
             setEmail(e.target.value);
           }}
         />
-        <label for="floatingInput">Adresse email</label>
+        <label htmlFor="floatingInput">Adresse email</label>
       </div>
       <div className="form-floating mb-2">
         <input
           type="password"
           className="form-control"
-          id="floatingPassword"
+          id="floatingPassword inputPassword"
           placeholder="Password"
           value={password}
           onChange={function (e) {
             setPassword(e.target.value);
           }}
         />
-        <label for="floatingPassword">Mot de passe</label>
+        <label htmlFor="floatingPassword">Mot de passe</label>
       </div>
 
       <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">

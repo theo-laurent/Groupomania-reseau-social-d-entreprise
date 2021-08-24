@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AuthApi from "../components/AuthApi";
 
 export default function Login() {
-
   localStorage.clear();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +53,7 @@ export default function Login() {
             setEmail(e.target.value);
           }}
         />
-        <label for="floatingInput">Adresse email</label>
+        <label htmlFor="floatingInput">Adresse email</label>
       </div>
 
       <div className="form-floating">
@@ -68,7 +67,7 @@ export default function Login() {
             setPassword(e.target.value);
           }}
         />
-        <label for="floatingPassword">Mot de passe</label>
+        <label htmlFor="floatingPassword">Mot de passe</label>
       </div>
 
       <button className="w-100 btn btn-lg btn-primary" type="submit">

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./createArticle.css";
 
 export default function CreateArticle() {
   const [title, setTitle] = useState("");
@@ -45,7 +43,7 @@ export default function CreateArticle() {
             setTitle(e.target.value);
           }}
         />
-        <label for="floatingInput">Titre de votre post</label>
+        <label htmlFor="floatingInput">Titre de votre post</label>
       </div>
       <div className="form-floating mb-2">
         <textarea
@@ -56,7 +54,7 @@ export default function CreateArticle() {
             setContent(e.target.value);
           }}
         />
-        <label for="floatingInput">Contenu</label>
+        <label htmlFor="floatingInput">Contenu</label>
       </div>
       <div className="form-floating mb-2">
         <input
@@ -67,7 +65,7 @@ export default function CreateArticle() {
             setAttachment(e.target.value);
           }}
         />
-        <label for="floatingInput">Lien de l'article</label>
+        <label htmlFor="floatingInput">Lien de l'article</label>
       </div>
 
       <button

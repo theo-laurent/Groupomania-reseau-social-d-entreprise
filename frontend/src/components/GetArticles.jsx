@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
-export default function UserArticles() {
+export default function GetArticles() {
   const storage = JSON.parse(localStorage.getItem("token"));
-  let token = "Bearer " + storage.token;
+  const token = "Bearer " + storage.token;
 
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState();
 
-  useEffect(function () {
-    fetch("http://localhost:4200/api/users/userArticles", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    })
-      .then(function (res) {
-        return res.json();
+  useEffect(
+    function () {
+      fetch("http://localhost:4200/api/post", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
       })
-      .then(function (result) {
-        setArticles(result);
-      })
-      .catch(function (error) {
-        return error;
-      });
-  }, []);
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (result) {
+          setArticles(result[0]);
+        })
+        .catch(function (error) {
+          return error;
+        });
+    },
+    [token]
+  );
 
   if (articles === undefined) {
     return <div>Chargement ...</div>;
@@ -33,9 +37,12 @@ export default function UserArticles() {
       return (
         <div className="card mb-5">
           <div className="card-header d-flex justify-content-between align-middle">
-            <h6 className="mt-auto">
-              {article.firstName + " " + article.lastName}
-            </h6>
+            <h6 className="">{article.firstName + " " + article.lastName}</h6>
+            <Link to={`/article/${article.id}`}>
+              <button type="button" className="btn btn-outline-primary d-flex">
+                <i className="bi bi-plus-lg"></i>
+              </button>
+            </Link>
           </div>
           <div className="card-body text-center">
             <h5 className="card-title">{article.title}</h5>

@@ -24,3 +24,51 @@
 img {
   height: 30px;
 }
+
+.card {
+  width: 50%;
+  margin: auto;
+}
+
+.card-header {
+  align-items: center;
+}
+
+#formUser {
+  max-width: 600px;
+}
+
+h6 {
+  margin-bottom: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.formBio {
+  min-height: 200px !important;
+}
+
+.btnUser {
+  width: 200px !important;
+}
+
+.formCreateArticle,
+.formTitle,
+.formContent,
+.formAttachment {
+  min-width: 45%;
+}
+
+.formCreateArticle {
+  text-align: center;
+}
+
+textarea.formContent {
+  min-height: 150px;
+}
+
+.btnArticle {
+  max-width: 150px;
+}
