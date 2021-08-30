@@ -119,3 +119,21 @@ exports.getComment = function (req, res, next) {
     }
   );
 };
+
+exports.deleteComment = function (req, res, next) {
+  let id = req.params.id;
+  console.log(id);
+
+  db.query(
+    `DELETE FROM comment
+     WHERE id = ?`,
+    [id],
+    function (error) {
+      if (error) {
+        throw error;
+      } else {
+        res.status(201).json({ message: "Commentaire bien supprimé !" });
+      }
+    }
+  );
+};

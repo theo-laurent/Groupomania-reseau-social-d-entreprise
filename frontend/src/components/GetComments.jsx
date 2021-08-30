@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Moment from "react-moment";
+import DeleteComment from "./DeleteComment";
 
 export default function GetComments() {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
-
-  const idOfUser = storage.userId;
-  const isAdmin = storage.isAdmin;
 
   const { id } = useParams();
   const [result, setResult] = useState();
@@ -34,37 +32,6 @@ export default function GetComments() {
     [token, id]
   );
 
-  console.log(idOfUser);
-
-  const deleteComment = function (e) {
-    e.preventDefault();
-    if (isAdmin === 1 || idOfUser === result.userId) {
-      if (window.confirm("Voulez vous vraiment supprimer ce commentaire ?")) {
-        fetch("", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        })
-          .then(function (res) {
-            return res.json();
-          })
-          .then(function (result) {
-            alert(JSON.stringify(result.message));
-          })
-          .catch(function (error) {
-            return error;
-          });
-      } else {
-      }
-    } else {
-      alert(
-        "Vous ne pouvez pas supprimer les commentaires d'autres utilisateurs !"
-      );
-    }
-  };
-
   if (result === undefined) {
     return <div>Chargement . . .</div>;
   } else {
@@ -74,7 +41,7 @@ export default function GetComments() {
           return (
             <div
               key={`${result.id}-${index}`}
-              className="card mt-5 mb-5"
+              className="formGetArticles card mt-5 mb-5"
               style={{ width: "45%" }}
             >
               <div className="card-header d-flex justify-content-between">
@@ -94,13 +61,7 @@ export default function GetComments() {
                     {result.firstName + " " + result.lastName}
                   </h6>
                 </span>
-                <button
-                  onClick={deleteComment}
-                  type="button"
-                  className="btn btn-outline-danger d-flex"
-                >
-                  <i className="bi bi-x-lg"></i>
-                </button>
+                <DeleteComment idUser={result.userId} idComment={result.id}/>
               </div>
               <div className="card-body text-center">
                 <p className="card-text">{result.message} </p>
