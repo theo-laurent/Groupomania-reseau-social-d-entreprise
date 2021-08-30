@@ -16,6 +16,7 @@ exports.signup = function (req, res, next) {
         email: req.body.email,
         password: hash,
         bio: req.body.bio,
+        imageUrl: "http://localhost:4200/images/imageProfilDéfaut.png",
       };
       db.query(`INSERT INTO user SET ?`, [user], function (error) {
         if (error) {
@@ -79,7 +80,7 @@ exports.getUser = function (req, res, next) {
   const userId = decodedToken.userId;
 
   db.query(
-    `SELECT firstName, lastName, bio 
+    `SELECT firstName, lastName, bio, imageUrl
     FROM user 
     WHERE id = ?`,
     [userId],
@@ -98,13 +99,24 @@ exports.userUpdate = function (req, res, next) {
   const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
   const userId = decodedToken.userId;
 
-  const user = {
-    firstName:
-      req.body.firstName.charAt(0).toUpperCase() + req.body.firstName.slice(1),
-    lastName:
-      req.body.lastName.charAt(0).toUpperCase() + req.body.lastName.slice(1),
-    bio: req.body.bio,
-  };
+  let user = {};
+
+  if (req.body.firstName) {
+    user.firstName = req.body.firstName;
+  }
+  if (req.body.lastName) {
+    user.lastName = req.body.lastName;
+  }
+  if (req.body.bio) {
+    user.bio = req.body.bio;
+  }
+  if (req.file) {
+    user.imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  }
+
+  console.log(user);
 
   db.query(
     `UPDATE user 

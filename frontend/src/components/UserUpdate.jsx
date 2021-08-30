@@ -1,58 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 import UserDelete from "./UserDelete";
 
 export default function UserUpdate() {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  useEffect(
-    function () {
-      fetch("http://localhost:4200/api/users/getUser", {
-        method: "GET",
+  const onSubmit = async function (data) {
+    const fd = new FormData();
+    fd.append("image", data.image[0]);
+    fd.append("firstName", data.firstName);
+    fd.append("lastName", data.lastName);
+    fd.append("bio", data.bio);
+
+    axios
+      .post("http://localhost:4200/api/users/userUpdate", fd, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
       })
-        .then(function (res) {
-          return res.json();
-        })
-        .then(function (result) {
-          console.log(result);
-          setFirstName(result.firstName);
-          setLastName(result.lastName);
-          setBio(result.bio);
-        })
-        .catch(function (error) {
-          return error;
-        });
-    },
-    [token]
-  );
-
-  const submit = async function (e) {
-    e.preventDefault();
-
-    const data = { firstName, lastName, bio };
-
-    await fetch("http://localhost:4200/api/users/userUpdate", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(data),
-    })
       .then(function (res) {
-        return res.json();
-      })
-      .then(function (result) {
-        console.log(result);
-        alert(JSON.stringify(result.message));
+        alert(res.data.message);
       })
       .catch(function (error) {
         return error;
@@ -60,38 +36,61 @@ export default function UserUpdate() {
   };
 
   return (
-    <form onSubmit={submit} className="form-signin" id="formUser">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="form-signin"
+      id="formUser"
+    >
+      <h2 className="text-center">Modifier mon profil</h2>
+
       <div className="mb-3 text-left">
         <label htmlFor="formFile" className="form-label">
           <strong>Avatar</strong>
         </label>
-        <input className="form-control" type="file" id="formFile" />
+        <input
+          className="form-control"
+          type="file"
+          name="image"
+          {...register("image")}
+        />
       </div>
+
       <div className="form-floating mb-2">
         <input
           autoFocus
           type="text"
           className="form-control"
-          id="floatingInput"
-          placeholder="Martin"
-          value={firstName}
-          onChange={function (e) {
-            setFirstName(e.target.value);
-          }}
+          name="firstName"
+          {...register("firstName", {
+            minLength: 2,
+            maxLength: 26,
+            pattern: /[a-zA-ZÀ-ÿ]/,
+          })}
         />
+        {errors.firstName && (
+          <p className="text-center text-danger mt-1">
+            Le prénom ne doit contenir que des lettres !
+          </p>
+        )}{" "}
         <label htmlFor="floatingInput">Prénom</label>
       </div>
+
       <div className="form-floating mb-2">
         <input
           type="text"
           className="form-control"
-          id="floatingInput"
-          placeholder="Dupont"
-          value={lastName}
-          onChange={function (e) {
-            setLastName(e.target.value);
-          }}
+          name="lastName"
+          {...register("lastName", {
+            minLength: 2,
+            maxLength: 26,
+            pattern: /[a-zA-ZÀ-ÿ]/,
+          })}
         />
+        {errors.lastName && (
+          <p className="text-center text-danger mt-1">
+            Le nom ne doit contenir que des lettres !
+          </p>
+        )}{" "}
         <label htmlFor="floatingInput">Nom</label>
       </div>
 
@@ -99,15 +98,12 @@ export default function UserUpdate() {
         <textarea
           type="text"
           className="form-control formBio"
-          id="floatingInput"
-          placeholder="Bio"
-          value={bio}
-          onChange={function (e) {
-            setBio(e.target.value);
-          }}
+          name="bio"
+          {...register("bio")}
         />
         <label htmlFor="floatingPassword">Votre bio</label>
       </div>
+
       <div className="d-flex justify-content-evenly">
         <button className="btn btn-lg btn-primary mt-3 btnUser" type="submit">
           Modifier{" "}

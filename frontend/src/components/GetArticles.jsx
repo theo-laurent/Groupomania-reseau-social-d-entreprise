@@ -37,6 +37,16 @@ export default function GetArticles() {
       return (
         <div className="card mb-5">
           <div className="card-header d-flex justify-content-between align-middle">
+            <img
+              src={article.imageUrl}
+              style={{
+                width: 55,
+                height: 55,
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+              alt="la miniature de l'avatar de l'utilisateur"
+            />
             <h6 className="">{article.firstName + " " + article.lastName}</h6>
             <Link to={`/article/${article.id}`}>
               <button type="button" className="btn btn-outline-primary d-flex">

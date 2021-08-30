@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.getAllPost = function (req, res, next) {
   db.promise()
     .query(
-      `SELECT user.firstName, user.lastName, post.id, post.userId, 
+      `SELECT user.firstName, user.lastName, user.imageUrl, post.id, post.userId, 
         post.title, post.content, post.attachment, post.createdAt 
       FROM user 
       JOIN post on user.id = post.userId 
@@ -46,13 +46,20 @@ exports.createPost = function (req, res, next) {
   const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
   const userId = decodedToken.userId;
 
-  const article = {
+  let article = {
     userId: userId,
     title: req.body.title,
     content: req.body.content,
     attachment: req.body.attachment,
     createdAt: dateTime,
   };
+
+  if (req.file) {
+    article.imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  }
+
   db.query(`INSERT INTO post SET ?`, [article], function (error) {
     if (error) {
       throw error;

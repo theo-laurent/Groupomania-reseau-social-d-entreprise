@@ -75,7 +75,7 @@ export default function GetOneArticle() {
     return <div>Chargement . . .</div>;
   } else {
     return (
-      <div className="card mt-5" style={{ "min-height": "200px" }}>
+      <div className="card mt-5" style={{ minHeight: "200px" }}>
         <div className="card-header d-flex justify-content-between align-middle">
           <h6 className="align-items-center">
             {dataArticle.firstName + " " + dataArticle.lastName}
@@ -85,7 +85,7 @@ export default function GetOneArticle() {
             type="button"
             className="btn btn-outline-danger d-flex"
           >
-            <i class="bi bi-trash-fill"></i>
+            <i className="bi bi-trash-fill"></i>
           </button>
         </div>
         <div className="card-body text-center">

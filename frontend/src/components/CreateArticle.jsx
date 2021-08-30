@@ -1,30 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 export default function CreateArticle() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const storage = JSON.parse(localStorage.getItem("token"));
+  let token = "Bearer " + storage.token;
 
-  const submit = async function (e) {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const storage = JSON.parse(localStorage.getItem("token"));
-    let token = "Bearer " + storage.token;
-    let userId = storage.userId;
+  const onSubmit = async function (data) {
+    const fd = new FormData();
 
-    const data = { userId, title, content, attachment };
+    fd.append("title", data.title);
+    fd.append("content", data.content);
+    fd.append("image", data.image[0]);
+    fd.append("attachment", data.attachment);
 
-    await fetch("http://localhost:4200/api/post/article", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(data),
-    })
+    axios
+      .post("http://localhost:4200/api/post/article", fd, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
       .then(function (res) {
-        alert("Post bien publié");
-        return res.json();
+        alert(res.data.message);
       })
       .catch(function (error) {
         return error;
@@ -32,38 +36,53 @@ export default function CreateArticle() {
   };
 
   return (
-    <form onSubmit={submit} className="form-signin formCreateArticle">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="form-signin"
+      id="formCreateArticle"
+    >
       <h2 className="h3 mb-3 fw-normal">Partager un nouvel article</h2>
+
       <div className="form-floating mb-2">
         <input
           type="text"
           className="form-control formTitle"
-          value={title}
-          onChange={function (e) {
-            setTitle(e.target.value);
-          }}
+          name="title"
+          {...register("title", { required: true, minLength: 2 })}
         />
+        {errors.title && (
+          <p className="text-center text-danger mt-1">
+            Le titre ne peut pas être vide !
+          </p>
+        )}{" "}
         <label htmlFor="floatingInput">Titre de votre post</label>
       </div>
-      <div className="form-floating mb-2">
+
+      <div className="form-floating">
         <textarea
           type="text"
           className="form-control formContent"
-          value={content}
-          onChange={function (e) {
-            setContent(e.target.value);
-          }}
+          name="content"
+          {...register("content", { required: true, minLength: 2 })}
         />
+        {errors.content && (
+          <p className="text-center text-danger mt-1">
+            Le contenu ne peut pas être vide!
+          </p>
+        )}{" "}
         <label htmlFor="floatingInput">Contenu</label>
       </div>
-      <div className="form-floating mb-2">
+
+      <div className="mt-2">
+        <input className="form-control" type="file" {...register("image")} />
+      </div>
+
+      <div className="form-floating mb-2 mt-2">
         <input
           type="text"
           className="form-control formAttachment"
-          value={attachment}
-          onChange={function (e) {
-            setAttachment(e.target.value);
-          }}
+          name="attachment"
+          {...register("attachment")}
         />
         <label htmlFor="floatingInput">Lien de l'article</label>
       </div>
@@ -77,5 +96,3 @@ export default function CreateArticle() {
     </form>
   );
 }
-
-// titre, content, attachment

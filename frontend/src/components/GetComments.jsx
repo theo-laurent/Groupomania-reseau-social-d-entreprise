@@ -22,7 +22,6 @@ export default function GetComments() {
       })
       .then(function (result) {
         setResult(result);
-        console.log(result);
       })
       .catch(function (error) {
         return error;
