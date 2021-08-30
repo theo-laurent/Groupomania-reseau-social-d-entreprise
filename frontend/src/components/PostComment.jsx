@@ -35,7 +35,7 @@ export default function PostComment() {
   return (
     <form
       onSubmit={commentArticle}
-      className="card mt-3"
+      className="formGetArticles card mt-3 mb-5"
       style={{ width: "45%" }}
     >
       <div className="card-header">
@@ -43,6 +43,7 @@ export default function PostComment() {
       </div>
       <div className="card-body">
         <textarea
+          required
           value={comment}
           className="form-control"
           style={{ height: "100px" }}

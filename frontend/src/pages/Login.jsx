@@ -3,8 +3,6 @@ import AuthApi from "../components/AuthApi";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
-  localStorage.clear();
-
   const Auth = React.useContext(AuthApi);
   const { register, handleSubmit } = useForm();
 
@@ -35,7 +33,11 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form-signin">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="form-signin"
+      id="formLogin"
+    >
       <h1 className="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
       <div className="form-floating mb-2">
         <input

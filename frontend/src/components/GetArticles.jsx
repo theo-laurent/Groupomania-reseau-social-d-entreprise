@@ -33,21 +33,24 @@ export default function GetArticles() {
   if (articles === undefined) {
     return <div>Chargement ...</div>;
   } else {
-    return articles.map(function (article) {
+    return articles.map(function (article, index) {
       return (
-        <div className="card mb-5">
+        <div className="formGetArticles card mb-5" key={`${article.id}-${index}`}>
           <div className="card-header d-flex justify-content-between align-middle">
-            <img
-              src={article.imageUrl}
-              style={{
-                width: 55,
-                height: 55,
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-              alt="la miniature de l'avatar de l'utilisateur"
-            />
-            <h6 className="">{article.firstName + " " + article.lastName}</h6>
+            <span className="d-flex align-items-center">
+              <img
+                src={article.imageUrl}
+                style={{
+                  width: 55,
+                  height: 55,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  marginRight: "10px",
+                }}
+                alt="la miniature de l'avatar de l'utilisateur"
+              />
+              <h6>{article.firstName + " " + article.lastName}</h6>
+            </span>
             <Link to={`/article/${article.id}`}>
               <button type="button" className="btn btn-outline-primary d-flex">
                 <i className="bi bi-plus-lg"></i>
@@ -57,6 +60,15 @@ export default function GetArticles() {
           <div className="card-body text-center">
             <h5 className="card-title">{article.title}</h5>
             <p className="card-text">{article.content} </p>
+            {article.postImage ? (
+              <img
+                src={article.postImage}
+                alt={article.postImage}
+                style={{ width: "60%", height: "100%" }}
+              />
+            ) : (
+              <></>
+            )}
             <a
               href={article.attachment}
               target="_blank"

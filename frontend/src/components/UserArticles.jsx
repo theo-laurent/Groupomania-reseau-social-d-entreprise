@@ -32,9 +32,9 @@ export default function UserArticles() {
   if (articles === undefined) {
     return <div>Chargement ...</div>;
   } else {
-    return articles.map(function (article) {
+    return articles.map(function (article,index) {
       return (
-        <div className="card mb-5">
+        <div className="formGetArticles card mb-5" key={`${article.id}-${index}`}>
           <div className="card-header d-flex justify-content-between align-middle">
             <h6 className="mt-auto">
               {article.firstName + " " + article.lastName}

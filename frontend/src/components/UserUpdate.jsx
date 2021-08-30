@@ -104,8 +104,8 @@ export default function UserUpdate() {
         <label htmlFor="floatingPassword">Votre bio</label>
       </div>
 
-      <div className="d-flex justify-content-evenly">
-        <button className="btn btn-lg btn-primary mt-3 btnUser" type="submit">
+      <div className="d-lg-flex justify-content-evenly text-center mt-4 mb-3">
+        <button className="btn btn-lg btn-primary btnUser mb-2" type="submit">
           Modifier{" "}
         </button>
         <UserDelete />

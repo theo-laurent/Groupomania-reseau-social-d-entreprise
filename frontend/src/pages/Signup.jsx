@@ -34,7 +34,11 @@ export default function Signup(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form-signin">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="form-signin"
+      id="formSignup"
+    >
       <h1 className="h3 mb-3 fw-normal">Inscrivez vous dès maintenant</h1>
 
       <div className="form-floating mb-2">

@@ -75,11 +75,22 @@ export default function GetOneArticle() {
     return <div>Chargement . . .</div>;
   } else {
     return (
-      <div className="card mt-5" style={{ minHeight: "200px" }}>
+      <div className="formGetArticles card mt-5" style={{ minHeight: "200px" }}>
         <div className="card-header d-flex justify-content-between align-middle">
-          <h6 className="align-items-center">
-            {dataArticle.firstName + " " + dataArticle.lastName}
-          </h6>
+          <span className="d-flex align-items-center">
+            <img
+              src={dataArticle.imageUrl}
+              style={{
+                width: 55,
+                height: 55,
+                borderRadius: "50%",
+                objectFit: "cover",
+                marginRight: "10px",
+              }}
+              alt="la miniature de l'avatar de l'utilisateur"
+            />
+            <h6>{dataArticle.firstName + " " + dataArticle.lastName}</h6>
+          </span>
           <button
             onClick={deleteArticle}
             type="button"
@@ -91,6 +102,15 @@ export default function GetOneArticle() {
         <div className="card-body text-center">
           <h5 className="card-title">{dataArticle.title}</h5>
           <p className="card-text">{dataArticle.content} </p>
+          {dataArticle.postImage ? (
+              <img
+                src={dataArticle.postImage}
+                alt={dataArticle.postImage}
+                style={{ width: "60%", height: "100%" }}
+              />
+            ) : (
+              <></>
+            )}
           <a
             href={dataArticle.attachment}
             target="_blank"

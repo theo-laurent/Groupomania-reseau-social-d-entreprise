@@ -34,7 +34,7 @@ export default function UserDelete() {
   return (
     <button
       onClick={submit}
-      className="w-100 btn btn-lg btn-danger mt-3 btnUser"
+      className="w-100 btn btn-lg btn-danger btnUser mb-2"
       type="submit"
     >
       Supprimer{" "}

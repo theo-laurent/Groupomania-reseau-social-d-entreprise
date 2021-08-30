@@ -7,8 +7,8 @@ export default function OneArticle() {
   return (
     <React.Fragment>
       <GetOneArticle />
-      <PostComment />
       <GetComments />
+      <PostComment />
     </React.Fragment>
   );
 }

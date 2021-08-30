@@ -32,7 +32,7 @@ export default function UserProfil() {
     <>
       <h2 className="text-center mt-3">Mon profil</h2>
 
-      <div className="card flex-md-row mb-2">
+      <div className="formGetArticles card flex-md-row mb-2">
         <div className="card-body d-flex flex-column align-items-start">
           <h3 className="mb-0">{data.firstName}</h3>
           <p className="mb-1 text-muted">{data.lastName}</p>
@@ -40,7 +40,7 @@ export default function UserProfil() {
         </div>
         <img
           src={data.imageUrl}
-          className="card-img-right flex-auto d-none d-md-block"
+          className="card-img-right flex-auto d-none d-sm-block"
           alt="le profil d'un membre de Groupomania"
           style={{ height: 150, width: "55%", objectFit: "cover" }}
         />

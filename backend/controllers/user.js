@@ -116,8 +116,6 @@ exports.userUpdate = function (req, res, next) {
     }`;
   }
 
-  console.log(user);
-
   db.query(
     `UPDATE user 
      SET ?

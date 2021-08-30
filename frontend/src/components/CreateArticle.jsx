@@ -12,7 +12,7 @@ export default function CreateArticle() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async function (data) {
+  const onSubmit = function (data) {
     const fd = new FormData();
 
     fd.append("title", data.title);

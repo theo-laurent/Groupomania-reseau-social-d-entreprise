@@ -5,7 +5,7 @@ exports.getAllPost = function (req, res, next) {
   db.promise()
     .query(
       `SELECT user.firstName, user.lastName, user.imageUrl, post.id, post.userId, 
-        post.title, post.content, post.attachment, post.createdAt 
+        post.title, post.content,post.imageUrl AS postImage, post.attachment, post.createdAt 
       FROM user 
       JOIN post on user.id = post.userId 
       ORDER BY post.createdAt DESC`
@@ -21,9 +21,9 @@ exports.getAllPost = function (req, res, next) {
 exports.getOnePost = function (req, res, next) {
   let id = req.params.id;
   db.query(
-    `SELECT post.id AS postId, post.title, post.content, post.attachment, 
+    `SELECT post.id AS postId, post.title, post.content, post.imageUrl AS postImage, post.attachment, 
             post.createdAt, post.updatedAt, 
-            user.firstName, user.lastName, user.id AS userId
+            user.firstName, user.lastName,user.imageUrl, user.id AS userId
       FROM post
       JOIN user
       ON post.userId = user.id
@@ -103,7 +103,7 @@ exports.getComment = function (req, res, next) {
   let id = req.params.id;
 
   db.query(
-    `SELECT user.firstName, user.lastName, comment.message, comment.createdAt, comment.updatedAt
+    `SELECT user.id AS userId, user.firstName, user.lastName, user.imageUrl, comment.id, comment.message, comment.createdAt, comment.updatedAt
     FROM comment
     JOIN user ON comment.userId = user.id
     JOIN post ON comment.postId = post.id
