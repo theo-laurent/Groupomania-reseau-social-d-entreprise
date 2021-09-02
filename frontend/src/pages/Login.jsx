@@ -1,5 +1,6 @@
 import React from "react";
 import AuthApi from "../components/AuthApi";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
@@ -65,6 +66,12 @@ export default function Login() {
       <button className="mt-2 w-100 btn btn-lg btn-primary" type="submit">
         Se connecter{" "}
       </button>
+      <div className="mt-3 text-end">
+        <p>Vous n'avez pas encore de compte ? </p>
+        <Link to="/signup">
+          <button className="btn btn-outline-danger">S'inscrire</button>
+        </Link>
+      </div>
     </form>
   );
 }

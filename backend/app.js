@@ -1,11 +1,16 @@
+require("dotenv").config();
 //const
 const express = require("express");
 const app = express();
 const path = require("path");
 
+//securité
+const helmet = require("helmet");
+
 //routes
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
+const { appendFile } = require("fs");
 
 //CORS
 app.use(function (req, res, next) {
@@ -18,6 +23,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(helmet());
 app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));

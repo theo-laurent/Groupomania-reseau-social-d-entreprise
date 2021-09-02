@@ -44,7 +44,7 @@ export default function UserUpdate() {
     [token, count]
   );
 
-  const onSubmit = async function () {
+  const onSubmit = function () {
     let fd = new FormData();
 
     fd.append("image", document.querySelector(".file").files[0]);

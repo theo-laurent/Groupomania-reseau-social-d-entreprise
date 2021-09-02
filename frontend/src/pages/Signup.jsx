@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function Signup(props) {
@@ -122,6 +122,13 @@ export default function Signup(props) {
       <button className="w-100 btn btn-lg btn-primary" type="submit">
         S'inscrire{" "}
       </button>
+      <div className="mt-3 text-end">
+        <p> Vous avez déja un compte ?</p>
+        <Link to="/login">
+          {" "}
+          <button className="btn btn-outline-danger">Connectez vous</button>
+        </Link>
+      </div>
     </form>
   );
 }

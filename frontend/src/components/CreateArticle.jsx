@@ -13,9 +13,7 @@ export default function CreateArticle(props) {
   } = useForm();
 
   const onSubmit = function (data, e) {
-    e.target.reset();
-
-    const fd = new FormData();
+    let fd = new FormData();
 
     fd.append("title", data.title);
     fd.append("content", data.content);
@@ -77,7 +75,12 @@ export default function CreateArticle(props) {
       </div>
 
       <div className="mt-2">
-        <input className="form-control" type="file" {...register("image")} />
+        <input
+          className="form-control file"
+          type="file"
+          name="image"
+          {...register("image")}
+        />
       </div>
 
       <div className="form-floating mb-2 mt-2">

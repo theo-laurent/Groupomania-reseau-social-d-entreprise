@@ -9,7 +9,6 @@ const multer = require("../middleware/multer");
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
 
-//rajouter auth
 router.get("/getUser", auth, userController.getUser);
 router.get("/userArticles", auth, userController.userArticles);
 router.post("/userUpdate", auth, multer, userController.userUpdate);

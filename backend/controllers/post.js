@@ -43,7 +43,7 @@ exports.createPost = function (req, res, next) {
   const dateTime = new Date();
 
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
+  const decodedToken = jwt.verify(token, process.env.token);
   const userId = decodedToken.userId;
 
   let article = {
@@ -53,6 +53,8 @@ exports.createPost = function (req, res, next) {
     attachment: req.body.attachment,
     createdAt: dateTime,
   };
+
+  console.log(req.file);
 
   if (req.file) {
     article.imageUrl = `${req.protocol}://${req.get("host")}/images/${

@@ -2,10 +2,10 @@ const { query } = require("express");
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "C5hEy9wUU6b82Ky",
-  database: "groupomania",
+  host: process.env.db_host,
+  user: process.env.db_user,
+  password: process.env.db_password,
+  database: process.env.db_database,
 });
 
 module.exports = db;

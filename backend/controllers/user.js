@@ -62,8 +62,8 @@ exports.login = function (req, res, next) {
                     {
                       userId: result[0].id,
                     },
-                    "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr",
-                    { expiresIn: "8h" }
+                    process.env.token,
+                    { expiresIn: "12h" }
                   ),
                 });
               }
@@ -76,7 +76,7 @@ exports.login = function (req, res, next) {
 
 exports.getUser = function (req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
+  const decodedToken = jwt.verify(token, process.env.token);
   const userId = decodedToken.userId;
 
   db.query(
@@ -96,7 +96,7 @@ exports.getUser = function (req, res, next) {
 
 exports.userUpdate = function (req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
+  const decodedToken = jwt.verify(token, process.env.token);
   const userId = decodedToken.userId;
 
   let user = {
@@ -130,7 +130,7 @@ exports.userUpdate = function (req, res, next) {
 
 exports.userDelete = function (req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
+  const decodedToken = jwt.verify(token, process.env.token);
   const userId = decodedToken.userId;
 
   db.query(
@@ -150,7 +150,7 @@ exports.userDelete = function (req, res, next) {
 
 exports.userArticles = function (req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
+  const decodedToken = jwt.verify(token, process.env.token);
   const userId = decodedToken.userId;
 
   db.query(
