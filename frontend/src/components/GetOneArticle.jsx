@@ -103,19 +103,19 @@ export default function GetOneArticle() {
           <h5 className="card-title">{dataArticle.title}</h5>
           <p className="card-text">{dataArticle.content} </p>
           {dataArticle.postImage ? (
-              <img
-                src={dataArticle.postImage}
-                alt={dataArticle.postImage}
-                style={{ width: "60%", height: "100%" }}
-              />
-            ) : (
-              <></>
-            )}
+            <img
+              src={dataArticle.postImage}
+              alt={dataArticle.postImage}
+              style={{ width: "60%", height: "100%" }}
+            />
+          ) : (
+            <></>
+          )}
           <a
             href={dataArticle.attachment}
             target="_blank"
             rel="noopener noreferrer"
-            className="card-text"
+            className="card-text d-block mt-2"
           >
             {dataArticle.attachment}
           </a>

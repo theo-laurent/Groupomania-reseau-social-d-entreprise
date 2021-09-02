@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-export default function PostComment() {
+export default function PostComment(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
@@ -11,8 +12,10 @@ export default function PostComment() {
 
   const [comment, setComment] = useState("");
 
-  const commentArticle = function (e) {
-    e.preventDefault();
+  const { handleSubmit } = useForm();
+
+  const onSubmit = function (e) {
+
     const data = { idOfUser, id, comment };
 
     fetch("http://localhost:4200/api/post/postComment", {
@@ -24,8 +27,12 @@ export default function PostComment() {
       body: JSON.stringify(data),
     })
       .then(function (res) {
-        alert("Commentaire bien publié !");
         return res.json();
+      })
+      .then(function (result) {
+        alert(result.message);
+        props.setComment1(props.comment1 + 1);
+        setComment("")
       })
       .catch(function (error) {
         return error;
@@ -34,7 +41,7 @@ export default function PostComment() {
 
   return (
     <form
-      onSubmit={commentArticle}
+      onSubmit={handleSubmit(onSubmit)}
       className="formGetArticles card mt-3 mb-5"
       style={{ width: "45%" }}
     >
@@ -53,9 +60,7 @@ export default function PostComment() {
         ></textarea>
       </div>
       <div className="card-footer d-flex justify-content-end">
-        <button onSubmit={commentArticle} className="btn btn-primary btn-sm">
-          Commenter
-        </button>
+        <button className="btn btn-primary btn-sm">Commenter</button>
       </div>
     </form>
   );

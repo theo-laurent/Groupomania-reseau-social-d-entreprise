@@ -3,15 +3,17 @@ import { useParams } from "react-router-dom";
 import Moment from "react-moment";
 import DeleteComment from "./DeleteComment";
 
-export default function GetComments() {
+export default function GetComments(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
   const { id } = useParams();
   const [result, setResult] = useState();
 
+  const [count, setCount] = useState(0);
+
   useEffect(
-    function fetchGetComment() {
+    function () {
       fetch("http://localhost:4200/api/post/getComment/" + id, {
         method: "GET",
         headers: {
@@ -24,12 +26,13 @@ export default function GetComments() {
         })
         .then(function (result) {
           setResult(result);
+          window.scroll(10000, 0);
         })
         .catch(function (error) {
           return error;
         });
     },
-    [token, id]
+    [token, id, props.comment1, count]
   );
 
   if (result === undefined) {
@@ -61,7 +64,12 @@ export default function GetComments() {
                     {result.firstName + " " + result.lastName}
                   </h6>
                 </span>
-                <DeleteComment idUser={result.userId} idComment={result.id}/>
+                <DeleteComment
+                  idUser={result.userId}
+                  idComment={result.id}
+                  count1={count}
+                  setCount1={setCount}
+                />
               </div>
               <div className="card-body text-center">
                 <p className="card-text">{result.message} </p>

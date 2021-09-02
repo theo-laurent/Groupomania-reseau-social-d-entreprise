@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-export default function CreateArticle() {
+export default function CreateArticle(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
@@ -12,7 +12,9 @@ export default function CreateArticle() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = function (data) {
+  const onSubmit = function (data, e) {
+    e.target.reset();
+
     const fd = new FormData();
 
     fd.append("title", data.title);
@@ -29,6 +31,7 @@ export default function CreateArticle() {
       })
       .then(function (res) {
         alert(res.data.message);
+        props.setArticle1(props.article1 + 1);
       })
       .catch(function (error) {
         return error;

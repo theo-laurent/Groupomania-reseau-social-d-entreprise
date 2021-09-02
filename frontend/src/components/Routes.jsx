@@ -25,11 +25,7 @@ export default function Routes() {
         component={AllArticles}
       />
       <ProtectedRoute path="/user" auth={Auth.auth} component={UserAccount} />
-      <ProtectedRoute
-        path="/article/:id"
-        auth={Auth.auth}
-        component={OneArticle}
-      />
+      <Route path="/article/:id" auth={Auth.auth} component={OneArticle} />
     </Switch>
   );
 }

@@ -30,6 +30,7 @@ export default function DeleteComment(props) {
           })
           .then(function (result) {
             alert(JSON.stringify(result.message));
+            props.setCount1(props.count1 + 1);
           })
           .catch(function (error) {
             return error;

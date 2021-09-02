@@ -99,17 +99,12 @@ exports.userUpdate = function (req, res, next) {
   const decodedToken = jwt.verify(token, "6b9adNtSEFFY5ZID6rRFHZ4FWnOMVr");
   const userId = decodedToken.userId;
 
-  let user = {};
+  let user = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    bio: req.body.bio,
+  };
 
-  if (req.body.firstName) {
-    user.firstName = req.body.firstName;
-  }
-  if (req.body.lastName) {
-    user.lastName = req.body.lastName;
-  }
-  if (req.body.bio) {
-    user.bio = req.body.bio;
-  }
   if (req.file) {
     user.imageUrl = `${req.protocol}://${req.get("host")}/images/${
       req.file.filename

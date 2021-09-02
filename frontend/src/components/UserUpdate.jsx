@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import UserDelete from "./UserDelete";
@@ -7,18 +7,50 @@ export default function UserUpdate() {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [bio, setBio] = useState("");
+  const [image, setImage] = useState("");
+
+  const [count, setCount] = useState(0);
+
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async function (data) {
-    const fd = new FormData();
-    fd.append("image", data.image[0]);
-    fd.append("firstName", data.firstName);
-    fd.append("lastName", data.lastName);
-    fd.append("bio", data.bio);
+  useEffect(
+    function data() {
+      fetch("http://localhost:4200/api/users/getuser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (result) {
+          setFirstName(result.firstName);
+          setLastName(result.lastName);
+          setBio(result.bio);
+          setImage(result.imageUrl);
+        })
+        .catch(function (error) {
+          return error;
+        });
+    },
+    [token, count]
+  );
+
+  const onSubmit = async function () {
+    let fd = new FormData();
+
+    fd.append("image", document.querySelector(".file").files[0]);
+    fd.append("firstName", firstName);
+    fd.append("lastName", lastName);
+    fd.append("bio", bio);
 
     axios
       .post("http://localhost:4200/api/users/userUpdate", fd, {
@@ -29,6 +61,7 @@ export default function UserUpdate() {
       })
       .then(function (res) {
         alert(res.data.message);
+        setCount(count + 1);
       })
       .catch(function (error) {
         return error;
@@ -42,30 +75,30 @@ export default function UserUpdate() {
       id="formUser"
     >
       <h2 className="text-center">Modifier mon profil</h2>
-
+      <div className="text-center">
+        <img
+          src={image}
+          alt="avatar d'un membre de Groupomania"
+          style={{ width: 150, height: 150 }}
+        />
+      </div>
       <div className="mb-3 text-left">
         <label htmlFor="formFile" className="form-label">
           <strong>Avatar</strong>
         </label>
-        <input
-          className="form-control"
-          type="file"
-          name="image"
-          {...register("image")}
-        />
+        <input className="form-control file" type="file" name="image" />
       </div>
 
       <div className="form-floating mb-2">
         <input
+          required
           autoFocus
           type="text"
           className="form-control"
-          name="firstName"
-          {...register("firstName", {
-            minLength: 2,
-            maxLength: 26,
-            pattern: /[a-zA-ZÀ-ÿ]/,
-          })}
+          value={firstName}
+          onChange={function (e) {
+            setFirstName(e.target.value);
+          }}
         />
         {errors.firstName && (
           <p className="text-center text-danger mt-1">
@@ -77,14 +110,13 @@ export default function UserUpdate() {
 
       <div className="form-floating mb-2">
         <input
+          required
           type="text"
           className="form-control"
-          name="lastName"
-          {...register("lastName", {
-            minLength: 2,
-            maxLength: 26,
-            pattern: /[a-zA-ZÀ-ÿ]/,
-          })}
+          value={lastName}
+          onChange={function (e) {
+            setLastName(e.target.value);
+          }}
         />
         {errors.lastName && (
           <p className="text-center text-danger mt-1">
@@ -98,8 +130,10 @@ export default function UserUpdate() {
         <textarea
           type="text"
           className="form-control formBio"
-          name="bio"
-          {...register("bio")}
+          value={bio}
+          onChange={function (e) {
+            setBio(e.target.value);
+          }}
         />
         <label htmlFor="floatingPassword">Votre bio</label>
       </div>

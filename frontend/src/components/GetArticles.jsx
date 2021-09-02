@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
-export default function GetArticles() {
+export default function GetArticles(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
   const token = "Bearer " + storage.token;
 
@@ -27,15 +27,18 @@ export default function GetArticles() {
           return error;
         });
     },
-    [token]
+    [token, props.article1]
   );
 
   if (articles === undefined) {
-    return <div>Chargement ...</div>;
+    return <div>Chargement...</div>;
   } else {
     return articles.map(function (article, index) {
       return (
-        <div className="formGetArticles card mb-5" key={`${article.id}-${index}`}>
+        <div
+          className="formGetArticles card mb-5"
+          key={`${article.id}-${index}`}
+        >
           <div className="card-header d-flex justify-content-between align-middle">
             <span className="d-flex align-items-center">
               <img
@@ -73,7 +76,7 @@ export default function GetArticles() {
               href={article.attachment}
               target="_blank"
               rel="noopener noreferrer"
-              className="card-text"
+              className="card-text d-block mt-2"
             >
               {article.attachment}
             </a>
