@@ -40,7 +40,6 @@ export default function Signup(props) {
       id="formSignup"
     >
       <h1 className="h3 mb-3 fw-normal">Inscrivez vous dès maintenant</h1>
-
       <div className="form-floating mb-2">
         <input
           autoFocus
@@ -61,7 +60,6 @@ export default function Signup(props) {
         )}{" "}
         <label htmlFor="floatingInput">Prénom</label>
       </div>
-
       <div className="form-floating mb-2">
         <input
           required
@@ -81,7 +79,6 @@ export default function Signup(props) {
         )}{" "}
         <label htmlFor="floatingInput">Nom</label>
       </div>
-
       <div className="form-floating mb-2">
         <input
           required
@@ -100,7 +97,6 @@ export default function Signup(props) {
           </p>
         )}
       </div>
-
       <div className="form-floating mb-2">
         <input
           required
@@ -118,7 +114,6 @@ export default function Signup(props) {
         )}
         <label htmlFor="floatingPassword">Mot de passe</label>
       </div>
-
       <button className="w-100 btn btn-lg btn-primary" type="submit">
         S'inscrire{" "}
       </button>
@@ -127,6 +122,14 @@ export default function Signup(props) {
         <Link to="/login">
           {" "}
           <button className="btn btn-outline-danger">Connectez vous</button>
+        </Link>
+      </div>
+      <div className="mt-3 text-end">
+        <p>Retour à l'accueil</p>
+        <Link to="/">
+          <button className="btn btn-outline-success">
+            <i className="bi bi-arrow-90deg-left"></i>
+          </button>
         </Link>
       </div>
     </form>

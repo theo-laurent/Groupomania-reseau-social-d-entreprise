@@ -72,6 +72,14 @@ export default function Login() {
           <button className="btn btn-outline-danger">S'inscrire</button>
         </Link>
       </div>
+      <div className="mt-3 text-end">
+        <p>Retour à l'accueil</p>
+        <Link to="/">
+          <button className="btn btn-outline-success">
+            <i className="bi bi-arrow-90deg-left"></i>
+          </button>
+        </Link>
+      </div>
     </form>
   );
 }

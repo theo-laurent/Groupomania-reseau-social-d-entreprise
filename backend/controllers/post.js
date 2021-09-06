@@ -5,10 +5,11 @@ exports.getAllPost = function (req, res, next) {
   db.promise()
     .query(
       `SELECT user.firstName, user.lastName, user.imageUrl, post.id, post.userId, 
-        post.title, post.content,post.imageUrl AS postImage, post.attachment, post.createdAt 
+        post.title, post.content,post.imageUrl AS postImage, post.attachment, post.createdAt
       FROM user 
       JOIN post on user.id = post.userId 
-      ORDER BY post.createdAt DESC`
+      ORDER BY post.createdAt DESC 
+`
     )
     .then(function (data) {
       res.status(200).json(data);
@@ -53,8 +54,6 @@ exports.createPost = function (req, res, next) {
     attachment: req.body.attachment,
     createdAt: dateTime,
   };
-
-  console.log(req.file);
 
   if (req.file) {
     article.imageUrl = `${req.protocol}://${req.get("host")}/images/${
@@ -110,7 +109,7 @@ exports.getComment = function (req, res, next) {
     JOIN user ON comment.userId = user.id
     JOIN post ON comment.postId = post.id
     WHERE post.id = ?
-    ORDER BY comment.createdAt DESC `,
+    ORDER BY comment.createdAt ASC `,
     [id],
     function (error, result) {
       if (error) {

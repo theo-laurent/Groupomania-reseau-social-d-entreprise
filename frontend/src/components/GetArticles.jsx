@@ -39,7 +39,7 @@ export default function GetArticles(props) {
           className="formGetArticles card mb-5"
           key={`${article.id}-${index}`}
         >
-          <div className="card-header d-flex justify-content-between align-middle">
+          <div className="card-header d-flex justify-content-between">
             <span className="d-flex align-items-center">
               <img
                 src={article.imageUrl}
@@ -52,7 +52,9 @@ export default function GetArticles(props) {
                 }}
                 alt="la miniature de l'avatar de l'utilisateur"
               />
-              <h6>{article.firstName + " " + article.lastName}</h6>
+              <h5 className="m-0">
+                {article.firstName + " " + article.lastName}
+              </h5>
             </span>
             <Link to={`/article/${article.id}`}>
               <button type="button" className="btn btn-outline-primary d-flex">
@@ -67,7 +69,7 @@ export default function GetArticles(props) {
               <img
                 src={article.postImage}
                 alt={article.postImage}
-                style={{ width: "60%", height: "100%" }}
+                style={{ width: "auto", height: "300px" }}
               />
             ) : (
               <></>

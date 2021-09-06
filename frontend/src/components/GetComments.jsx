@@ -9,8 +9,9 @@ export default function GetComments(props) {
 
   const { id } = useParams();
   const [result, setResult] = useState();
-
   const [count, setCount] = useState(0);
+
+  console.log(props.postId);
 
   useEffect(
     function () {
@@ -26,7 +27,6 @@ export default function GetComments(props) {
         })
         .then(function (result) {
           setResult(result);
-          window.scroll(10000, 0);
         })
         .catch(function (error) {
           return error;
@@ -44,7 +44,7 @@ export default function GetComments(props) {
           return (
             <div
               key={`${result.id}-${index}`}
-              className="formGetArticles card mt-5 mb-5"
+              className="formGetArticles card mt-3 mb-3"
               style={{ width: "45%" }}
             >
               <div className="card-header d-flex justify-content-between">

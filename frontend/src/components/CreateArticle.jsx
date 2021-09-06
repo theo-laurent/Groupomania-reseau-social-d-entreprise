@@ -5,11 +5,15 @@ import { useForm } from "react-hook-form";
 export default function CreateArticle(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
+  let firstName = storage.firstName;
+  let lastName = storage.lastName;
+  let image = storage.imageUrl;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = function (data, e) {
@@ -30,6 +34,7 @@ export default function CreateArticle(props) {
       .then(function (res) {
         alert(res.data.message);
         props.setArticle1(props.article1 + 1);
+        reset();
       })
       .catch(function (error) {
         return error;
@@ -43,6 +48,20 @@ export default function CreateArticle(props) {
       id="formCreateArticle"
     >
       <h2 className="h3 mb-3 fw-normal">Partager un nouvel article</h2>
+      <div className="d-flex mb-2 align-items-center">
+        <img
+          src={image}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: "50%",
+            objectFit: "cover",
+            marginRight: "10px",
+          }}
+          alt="la miniature de l'avatar de l'utilisateur"
+        />
+        <h5>{firstName + " " + lastName}</h5>
+      </div>
 
       <div className="form-floating mb-2">
         <input

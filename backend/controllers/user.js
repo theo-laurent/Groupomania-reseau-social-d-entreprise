@@ -33,7 +33,7 @@ exports.signup = function (req, res, next) {
 
 exports.login = function (req, res, next) {
   db.query(
-    `SELECT id,password, firstName, lastName, isAdmin
+    `SELECT id,password, firstName, lastName, isAdmin, imageUrl
     FROM user WHERE email = ?`,
     [req.body.email],
     function (error, result) {
@@ -57,6 +57,7 @@ exports.login = function (req, res, next) {
                   firstName: result[0].firstName,
                   lastName: result[0].lastName,
                   message: "Utilisateur connecté !",
+                  imageUrl: result[0].imageUrl,
 
                   token: jwt.sign(
                     {
@@ -154,7 +155,7 @@ exports.userArticles = function (req, res, next) {
   const userId = decodedToken.userId;
 
   db.query(
-    `SELECT post.id, post.title, post.content, post.attachment, post.createdAt,   
+    `SELECT post.id, post.title, post.content, post.imageUrl, post.attachment, post.createdAt,   
       post.updatedAt, user.firstName, user.lastName
     FROM post
     JOIN user

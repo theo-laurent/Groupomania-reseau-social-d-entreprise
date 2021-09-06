@@ -34,8 +34,12 @@ export default function UserUpdate() {
         .then(function (result) {
           setFirstName(result.firstName);
           setLastName(result.lastName);
-          setBio(result.bio);
           setImage(result.imageUrl);
+          if (result.bio === null) {
+            setBio("");
+          } else {
+            setBio(result.bio);
+          }
         })
         .catch(function (error) {
           return error;

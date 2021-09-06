@@ -32,9 +32,12 @@ export default function UserArticles() {
   if (articles === undefined) {
     return <div>Chargement ...</div>;
   } else {
-    return articles.map(function (article,index) {
+    return articles.map(function (article, index) {
       return (
-        <div className="formGetArticles card mb-5" key={`${article.id}-${index}`}>
+        <div
+          className="formGetArticles card mb-5"
+          key={`${article.id}-${index}`}
+        >
           <div className="card-header d-flex justify-content-between align-middle">
             <h6 className="mt-auto">
               {article.firstName + " " + article.lastName}
@@ -43,6 +46,15 @@ export default function UserArticles() {
           <div className="card-body text-center">
             <h5 className="card-title">{article.title}</h5>
             <p className="card-text">{article.content} </p>
+            {article.imageUrl ? (
+              <img
+                src={article.imageUrl}
+                alt={article.imageUrl}
+                style={{ width: "60%", height: "100%" }}
+              />
+            ) : (
+              <></>
+            )}{" "}
             <a
               href={article.attachment}
               target="_blank"

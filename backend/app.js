@@ -1,8 +1,9 @@
 require("dotenv").config();
 //const
 const express = require("express");
-const app = express();
 const path = require("path");
+const session = require("express-session");
+const app = express();
 
 //securité
 const helmet = require("helmet");
@@ -24,6 +25,17 @@ app.use(function (req, res, next) {
 });
 
 app.use(helmet());
+
+let datecookie = new Date(Date.now() + 60 * 60 * 1000);
+app.use(
+  session({
+    secret: process.env.cookieSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true, httpOnly: true, expires: datecookie },
+  })
+);
+
 app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
