@@ -1,14 +1,14 @@
 # Groupomania
-1) Objectif
+## 1) Objectif
 - Créer un réseau social interne pour l'entreprise Groupomania.
 
-2) Technologies utilisées
+## 2) Technologies utilisées
 
 - Pour le frontend : `React`
 - Pour le backend : `Node.js`,`Express.js`
 - La base de données : `MySQL`
 
-3) Cahier des charges
+## 3) Cahier des charges
 
 - Le site doit comprendre un système d'authenficiation.
 - La creation du compte doit être simple et rapide.
@@ -20,7 +20,7 @@
 
 # Pré-requis #
 
-Avoir `Npm` et `Node.js` installé sur sa machine.
+- Avoir `Npm` et `Node.js` installé sur sa machine.
 
 # Instructions #
 

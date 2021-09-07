@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import "moment/locale/fr";
 
 export default function GetArticles(props) {
   const storage = JSON.parse(localStorage.getItem("token"));
@@ -22,7 +23,8 @@ export default function GetArticles(props) {
         })
         .then(function (result) {
           setArticles(result[0]);
-          window.scroll(0,300)
+          console.log(result);
+          window.scroll(0, 300);
         })
         .catch(function (error) {
           return error;
@@ -84,10 +86,17 @@ export default function GetArticles(props) {
               {article.attachment}
             </a>
           </div>
-          <div className="card-footer text-center">
+          <div className="card-footer d-flex align-items-center justify-content-between">
             <p className="mb-0">
               <Moment fromNow>{article.createdAt}</Moment>
             </p>
+            <Link
+              to={`/article/${article.id}`}
+              className="justify-self-center"
+              style={{ color: "black" }}
+            >
+              <h6>{article.comments} commentaires</h6>
+            </Link>
           </div>
         </div>
       );

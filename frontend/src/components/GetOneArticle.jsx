@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import Moment from "react-moment";
 
 export default function GetOneArticle() {
@@ -75,58 +75,72 @@ export default function GetOneArticle() {
     return <div>Chargement . . .</div>;
   } else {
     return (
-      <div className="formGetArticles card mt-5" style={{ minHeight: "200px" }}>
-        <div className="card-header d-flex justify-content-between align-middle">
-          <span className="d-flex align-items-center">
-            <img
-              src={dataArticle.imageUrl}
-              style={{
-                width: 55,
-                height: 55,
-                borderRadius: "50%",
-                objectFit: "cover",
-                marginRight: "10px",
-              }}
-              alt="la miniature de l'avatar de l'utilisateur"
-            />
-            <h6>{dataArticle.firstName + " " + dataArticle.lastName}</h6>
-          </span>
-          <button
-            onClick={deleteArticle}
-            type="button"
-            className="btn btn-outline-danger d-flex"
-          >
-            <i className="bi bi-trash-fill"></i>
-          </button>
+      <>
+        <div className="d-flex justify-content-center align-items-center">
+          <h5>Retour aux publications</h5>
+
+          <Link to="/articles">
+            <button className="btn btn-outline-primary mx-3">
+              <i class="bi bi-arrow-90deg-left"></i>
+            </button>
+          </Link>
         </div>
-        <div className="card-body text-center">
-          <h5 className="card-title">{dataArticle.title}</h5>
-          <p className="card-text">{dataArticle.content} </p>
-          {dataArticle.postImage ? (
-            <img
-              src={dataArticle.postImage}
-              alt={dataArticle.postImage}
-              style={{ width: "60%", height: "100%" }}
-            />
-          ) : (
-            <></>
-          )}
-          <a
-            href={dataArticle.attachment}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card-text d-block mt-2"
-          >
-            {dataArticle.attachment}
-          </a>
+        <div
+          className="formGetArticles card mt-4"
+          style={{ minHeight: "200px" }}
+        >
+          <div className="card-header d-flex justify-content-between align-middle">
+            <span className="d-flex align-items-center">
+              <img
+                src={dataArticle.imageUrl}
+                style={{
+                  width: 55,
+                  height: 55,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  marginRight: "10px",
+                }}
+                alt="la miniature de l'avatar de l'utilisateur"
+              />
+              <h6>{dataArticle.firstName + " " + dataArticle.lastName}</h6>
+            </span>
+            <button
+              onClick={deleteArticle}
+              type="button"
+              className="btn btn-outline-danger d-flex"
+            >
+              <i className="bi bi-trash-fill"></i>
+            </button>
+          </div>
+          <div className="card-body text-center">
+            <h5 className="card-title">{dataArticle.title}</h5>
+            <p className="card-text">{dataArticle.content} </p>
+            {dataArticle.postImage ? (
+              <img
+                src={dataArticle.postImage}
+                alt={dataArticle.postImage}
+                style={{ width: "60%", height: "100%" }}
+              />
+            ) : (
+              <></>
+            )}
+            <a
+              href={dataArticle.attachment}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-text d-block mt-2"
+            >
+              {dataArticle.attachment}
+            </a>
+          </div>
+          <div className="card-footer d-flex justify-content-start">
+            <p className="mb-0">
+              {" "}
+              <Moment fromNow>{dataArticle.createdAt}</Moment>
+            </p>
+          </div>
         </div>
-        <div className="card-footer d-flex justify-content-center">
-          <p className="mb-0">
-            {" "}
-            <Moment fromNow>{dataArticle.createdAt}</Moment>
-          </p>
-        </div>
-      </div>
+      </>
     );
   }
 }
