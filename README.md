@@ -10,7 +10,7 @@ https://user-images.githubusercontent.com/79447999/132387415-1a1cd061-5271-4224-
 
 - Pour le frontend : `React`
 - Pour le backend : `Node.js`,`Express.js`
-- La base de données : `MySQL`Présentation Groupomania - YouTube
+- La base de données : `MySQL`
 
 ## 3) Cahier des charges
 
