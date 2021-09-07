@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/79447999/132387415-1a1cd061-5271-4224-
 
 ## 3) Cahier des charges
 
-- Le site doit comprendre un système d'authenficiation.
+- Le site doit comprendre un système d'authentification.
 - La creation du compte doit être simple et rapide.
 - Le réseau social doit être accessible sur mobile.
 - La modification et la suppression du profil doit être possible.
@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/79447999/132387415-1a1cd061-5271-4224-
 
 # Instructions #
 
-0) Cloner le dossier `git clone https://github.com/theo-laurent/TheoLaurent_5_15022021.git`
+0) Cloner le dossier `git clone https://github.com/theo-laurent/TheoLaurent_7_15022021.git`
 
 ## Backend ##
 
