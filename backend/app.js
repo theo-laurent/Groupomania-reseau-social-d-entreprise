@@ -2,11 +2,11 @@ require("dotenv").config();
 //const
 const express = require("express");
 const path = require("path");
-const session = require("express-session");
 const app = express();
 
 //securité
 const helmet = require("helmet");
+const session = require("express-session");
 
 //routes
 const userRoutes = require("./routes/userRoutes");
@@ -24,7 +24,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(helmet());
 
 let datecookie = new Date(Date.now() + 60 * 60 * 1000);
 app.use(
@@ -36,10 +35,11 @@ app.use(
   })
 );
 
+app.use(helmet());
+
 app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
-
 app.use("/api/users", userRoutes);
 app.use("/api/post", postRoutes);
 

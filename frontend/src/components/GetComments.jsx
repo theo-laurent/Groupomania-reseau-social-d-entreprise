@@ -11,8 +11,6 @@ export default function GetComments(props) {
   const [result, setResult] = useState();
   const [count, setCount] = useState(0);
 
-  console.log(props.postId);
-
   useEffect(
     function () {
       fetch("http://localhost:4200/api/post/getComment/" + id, {
