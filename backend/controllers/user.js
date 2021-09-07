@@ -76,9 +76,7 @@ exports.login = function (req, res, next) {
 };
 
 exports.getUser = function (req, res, next) {
-  const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, process.env.token);
-  const userId = decodedToken.userId;
+  const userId = req.body.decodedToken.userId;
 
   db.query(
     `SELECT firstName, lastName, bio, imageUrl

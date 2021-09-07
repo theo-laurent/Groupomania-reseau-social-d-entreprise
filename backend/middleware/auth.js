@@ -8,6 +8,7 @@ module.exports = function (req, res, next) {
     if (req.body.userId && req.body.userId !== userId) {
       throw "User Id non valide !";
     } else {
+      req.body.decodedToken = decodedToken;
       next();
     }
   } catch (error) {

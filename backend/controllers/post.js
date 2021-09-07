@@ -5,9 +5,11 @@ exports.getAllPost = function (req, res, next) {
   db.promise()
     .query(
       `SELECT user.firstName, user.lastName, user.imageUrl, post.id, post.userId, 
-        post.title, post.content,post.imageUrl AS postImage, post.attachment, post.createdAt
+        post.title, post.content,post.imageUrl AS postImage, post.attachment, post.createdAt, COUNT(comment.postId) AS comments
       FROM user 
       JOIN post on user.id = post.userId 
+      LEFT JOIN comment on post.id = comment.postId
+      GROUP BY post.id
       ORDER BY post.createdAt DESC 
 `
     )

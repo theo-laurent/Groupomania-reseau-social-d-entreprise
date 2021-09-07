@@ -11,7 +11,6 @@ const session = require("express-session");
 //routes
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
-const { appendFile } = require("fs");
 
 //CORS
 app.use(function (req, res, next) {
