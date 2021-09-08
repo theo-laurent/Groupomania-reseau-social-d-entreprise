@@ -110,3 +110,14 @@ a:link {
   max-width: 500px;
   min-width: 280px;
 }
+
+.bannerUsers {
+  position: fixed;
+  margin-left: 20px;
+}
+
+@media all and (max-width: 1050px) {
+  .bannerUsers {
+    display: none;
+  }
+}

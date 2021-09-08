@@ -93,6 +93,19 @@ exports.getUser = function (req, res, next) {
   );
 };
 
+exports.getAllUser = function (req, res, next) {
+  db.query(
+    `SELECT user.id, user.firstName, user.lastName, user.imageUrl from user`,
+    function (error, result) {
+      if (error) {
+        throw error;
+      } else {
+        return res.status(200).json(result);
+      }
+    }
+  );
+};
+
 exports.userUpdate = function (req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.token);

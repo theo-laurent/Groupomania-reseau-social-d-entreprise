@@ -1,5 +1,7 @@
 # Groupomania
+
 ## 1) Objectif
+
 - Créer un réseau social interne pour l'entreprise Groupomania.
 
 ## 2) Technologies utilisées
@@ -18,23 +20,25 @@
 - Les salariés doivent pouvoir réagir aux publications.
 - Un administrateur doit pouvoir modérer les publications et les commentaires.
 
-# Pré-requis #
+# Pré-requis
 
 - Avoir `Npm` et `Node.js` installé sur sa machine.
 
-# Instructions #
+# Instructions
 
-0) Cloner le dossier `git clone https://github.com/theo-laurent/TheoLaurent_5_15022021.git`
+0. Cloner le dossier `git clone https://github.com/theo-laurent/TheoLaurent_5_15022021.git`
 
-## Backend ##
+## Backend
 
-1) Se placer dans le dossier backend , dans le terminal VSCode `cd backend`.
-2) Installer les dépendances avec `npm install`.
-3) Renommer le fichier `example.env` en `.env` et modifier les variables d'environnements avec vos propres valeurs.
-4) Lancer le serveur en executant `node server.js` ou `nodemon` (port 3000)
+1. Se placer dans le dossier backend , dans le terminal VSCode `cd backend`.
+2. Installer les dépendances avec `npm install`.
+3. Importer la base de données `db_groupomania.sql` afin de trouver une base déja configurée.
+4. Renommer le fichier `example.env` en `.env` et modifier les variables d'environnements avec vos propres valeurs.
+5. Lancer le serveur en executant `node server.js` ou `nodemon` (port 3000)
 
-## Frontend ##
+## Frontend
 
-1) Se placer dans le dossier frontend, dans le terminal VSCode `cd frontend`.
-2) Installer les dépendances avec `npm install`.
-3) Démarrer `npm start`, une page va s'ouvrir sinon rendez vous sur `http://localhost:3000/`
+1. Se placer dans le dossier frontend, dans le terminal VSCode `cd frontend`.
+2. Installer les dépendances avec `npm install`.
+3. Démarrer `npm start`, une page va s'ouvrir sinon rendez vous sur `http://localhost:3000/`
+4. Les identifiants du compte administrateur sont fournis dans le fichier `compte_administrateur.txt`.

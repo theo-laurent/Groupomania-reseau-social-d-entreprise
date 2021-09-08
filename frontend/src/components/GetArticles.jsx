@@ -23,7 +23,6 @@ export default function GetArticles(props) {
         })
         .then(function (result) {
           setArticles(result[0]);
-          console.log(result);
           window.scroll(0, 300);
         })
         .catch(function (error) {
@@ -72,7 +71,12 @@ export default function GetArticles(props) {
               <img
                 src={article.postImage}
                 alt={article.postImage}
-                style={{ width: "100%", height: "300px", objectFit: "fill" }}
+                style={{
+                  width: "80%",
+                  height: "auto",
+                  maxHeight: "300px",
+                  objectFit: "contain",
+                }}
               />
             ) : (
               <></>
