@@ -2,6 +2,7 @@ import React from "react";
 import AuthApi from "../components/AuthApi";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Cookie from "js-cookie";
 
 export default function Login() {
   const Auth = React.useContext(AuthApi);
@@ -26,6 +27,7 @@ export default function Login() {
           alert(JSON.stringify(result.message));
         } else {
           Auth.setAuth(true);
+          Cookie.set("user", "true", { expires: 0.3 });
         }
       })
       .catch(function (error) {

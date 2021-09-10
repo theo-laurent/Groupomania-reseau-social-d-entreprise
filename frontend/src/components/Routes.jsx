@@ -16,7 +16,7 @@ export default function Routes() {
 
   return (
     <Switch>
-      <ProtectedLogin path="/" exact component={Home} />
+      <ProtectedLogin path="/" exact component={Home} auth={Auth.auth} />
       <ProtectedLogin path="/signup" component={Signup} />
       <ProtectedLogin path="/login" component={Login} auth={Auth.auth} />
       <ProtectedRoute

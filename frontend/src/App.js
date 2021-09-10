@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import Cookie from "js-cookie";
 //import components
 import Routes from "./components/Routes.jsx";
 import AuthApi from "./components/AuthApi.jsx";
@@ -14,13 +15,19 @@ import icon from "./assets/icon.png";
 export default function App() {
   const [auth, setAuth] = useState(false);
 
+  useEffect(function () {
+    if (Cookie.get("user")) {
+      setAuth(true);
+    }
+  }, []);
+
   let navLink;
   if (auth === true) {
     navLink = (
       <Navbar fixed="top" expand="sm" bg="dark" variant="dark">
         <Container>
           <div>
-            <Link to="/" className="nav-link">
+            <Link to="/articles" className="nav-link">
               {window.screen.width > 500 ? (
                 <img src={logo} alt="Le logo de l'entreprise Groupomania" />
               ) : (

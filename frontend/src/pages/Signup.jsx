@@ -22,11 +22,17 @@ export default function Signup(props) {
       .then(function (res) {
         return res.json();
       })
+      .then(function (result) {
+        if (result.error) {
+          alert(result.error.sqlMessage);
+        } else {
+          setRedirect(true);
+          alert("Vous pouvez dès à present vous connectez !");
+        }
+      })
       .catch(function (error) {
         return error;
       });
-    alert("Vous êtes bien inscrit, vous pouvez à present vous connecter !");
-    setRedirect(true);
   };
 
   if (redirect === true) {

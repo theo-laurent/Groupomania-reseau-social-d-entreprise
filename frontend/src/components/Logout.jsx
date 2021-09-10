@@ -1,7 +1,9 @@
 import React from "react";
+import Cookie from "js-cookie";
 
 export default function Logout() {
   function logout() {
+    Cookie.remove("user");
     localStorage.clear();
     window.location.reload();
   }
