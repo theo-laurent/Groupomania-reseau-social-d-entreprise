@@ -12,6 +12,17 @@ const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 
+//
+let datecookie = new Date(Date.now() + 60 * 60 * 1000);
+app.use(
+  session({
+    secret: process.env.cookieSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true, httpOnly: true, expires: datecookie },
+  })
+);
+
 //CORS
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -23,19 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-let datecookie = new Date(Date.now() + 60 * 60 * 1000);
-app.use(
-  session({
-    secret: process.env.cookieSecret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true, httpOnly: true, expires: datecookie },
-  })
-);
-
 app.use(helmet());
-
 app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));

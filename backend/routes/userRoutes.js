@@ -5,9 +5,10 @@ const userController = require("../controllers/user");
 
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer");
+const limiter = require("../middleware/limiter");
 
-router.post("/signup", userController.signup);
-router.post("/login", userController.login);
+router.post("/signup", limiter, userController.signup);
+router.post("/login", limiter, userController.login);
 
 router.get("/getUser", auth, userController.getUser);
 router.get("/getAllUser", auth, userController.getAllUser);
