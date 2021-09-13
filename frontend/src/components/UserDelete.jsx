@@ -1,7 +1,10 @@
 import React from "react";
-
+import Cookie from "js-cookie";
+import AuthApi from "../components/utils/AuthApi";
 
 export default function UserDelete() {
+  const Auth = React.useContext(AuthApi);
+
   const storage = JSON.parse(localStorage.getItem("token"));
   let token = "Bearer " + storage.token;
 
@@ -20,8 +23,9 @@ export default function UserDelete() {
         },
       })
         .then(function (res) {
+          Auth.setAuth(false);
           localStorage.clear();
-          window.location.reload();
+          Cookie.remove("user");
           return res.json();
         })
         .catch(function (error) {

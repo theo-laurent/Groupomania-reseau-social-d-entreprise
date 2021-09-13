@@ -1,5 +1,5 @@
 import React from "react";
-import AuthApi from "../components/AuthApi";
+import AuthApi from "../components/utils/AuthApi";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Cookie from "js-cookie";

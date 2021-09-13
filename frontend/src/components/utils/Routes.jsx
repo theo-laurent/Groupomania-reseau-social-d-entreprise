@@ -4,12 +4,12 @@ import { Route, Switch, Redirect } from "react-router-dom";
 //imports composants
 import AuthApi from "./AuthApi";
 //import pages
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
-import AllArticles from "../pages/AllArticles";
-import Home from "../pages/Home";
-import UserAccount from "../pages/UserAccount";
-import OneArticle from "../pages/OneArticle";
+import Login from "../../pages/Login";
+import Signup from "../../pages/Signup";
+import AllArticles from "../../pages/AllArticles";
+import Home from "../../pages/Home";
+import UserAccount from "../../pages/UserAccount";
+import OneArticle from "../../pages/OneArticle";
 
 export default function Routes() {
   const Auth = React.useContext(AuthApi);

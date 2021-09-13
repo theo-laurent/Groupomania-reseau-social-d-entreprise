@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Cookie from "js-cookie";
 //import components
-import Routes from "./components/Routes.jsx";
-import AuthApi from "./components/AuthApi.jsx";
-import Logout from "./components/Logout.jsx";
+import Routes from "./components/utils/Routes.jsx";
+import AuthApi from "./components/utils/AuthApi.jsx";
+import Logout from "./components/utils/Logout.jsx";
 //import css
 import { Navbar, Nav, Container } from "react-bootstrap";
 import "./app.css";
